@@ -1,24 +1,17 @@
 import express from 'express'; /*Requer npm install @types/express -D */
+import cors from 'cors';
+import routes from './routes';
+import path from 'path';
 
 const app = express();
 
-//response --resposta 
-app.get('/users',(request,response) => {
-    console.log('Listagem de usuario');
+app.use(cors());
 
-    response.json([
-        'Jo',
-        'acçea',
-        'asda',
-        'asdasd'
-    ]);
-});
+app.use(express.json());
+
+app.use(routes);
+
+app.use('/uploads',express.static(path.resolve(__dirname, '..','uploads')));
 
 app.listen(3333);
- /*Para poder executar precisa do  npm install ts-node -D 
-    npm install typescript -D
-    npx tsc --init
-    npx ts-node src/server.ts
 
-    para ficar atualizando: npm install ts-node-dev -D
- */
